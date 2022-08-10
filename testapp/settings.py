@@ -1,5 +1,5 @@
 import dj_database_url
-# import django_heroku
+#import django_heroku
 import os
 
 from pathlib import Path
@@ -17,8 +17,8 @@ SECRET_KEY = 'django-insecure-u471o!nr-581!6p+(-_$9mhu*z2km7wz6yx!q27e1@kxb8onh=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = ['https://murmuring-sands-85389.herokuapp.com',' https://1aa0-41-85-177-216.eu.ngrok.io','127.0.0.1']
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -41,6 +42,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'testapp.urls'
@@ -70,14 +72,14 @@ WSGI_APPLICATION = 'testapp.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-    'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'what',
-        }
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+    #'default': {
+    #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #        'NAME': 'what',
+    #    }
 
 }
 
@@ -129,4 +131,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# django_heroku.settings(locals())
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://read.only.com",
+    "http://change.allowed.com",
+    "https://tpe.training.padme.me",
+    "http://localhost:8080",
+    "http://127.0.0.1:8000",
+]
+
+CSRF_TRUSTED_ORIGINS = ['https://1aa0-41-85-177-216.eu.ngrok.io', 'https://tpe.training.padme.me']
+
+#django_heroku.settings(locals())

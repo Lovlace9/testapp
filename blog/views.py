@@ -6,7 +6,16 @@ from django.template.loader import render_to_string
 def index(request):
     t = render_to_string("blog/index.html")
     
-    return render(request, "blog/index.html", {"autoescape": False})
+    response = JsonResponse(
+        # your stuff here
+    )
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "1000"
+    response["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
+
+    return response
+    #return render(request, "blog/index.html", {"autoescape": False})
 
 
 def test(request):
